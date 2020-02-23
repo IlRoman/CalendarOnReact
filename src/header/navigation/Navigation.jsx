@@ -1,61 +1,35 @@
 import React from 'react';
-import moment from 'moment';
 import Header from '../Header';
+import RedLine from '../../redLine/RedLine';
 import './navigation.scss'
 
 let arr = Array(7).fill('0');
+let x = (new Date() + '').split(' ')[4]
 
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            week: 0,
-        }
-    }
-
-    getMonday = () => {
-        let startOfWeek = moment().startOf('week').toDate();
-        return new Date(startOfWeek.setDate(startOfWeek.getDate() + this.state.week));
-    }
-
-    getPrevWeek = () => {
-        this.setState({
-            week: this.state.week -= 7,
-        })
-    }
-
-    getNextWeek = () => {
-        this.setState({
-            week: this.state.week += 7,
-        })
-    }
-
-    todayButton = () => {
-        this.setState({
-            week: 0,
-        })
-    }
-
-    currentMonthAndYear = () => {
-        let startOfWeek = moment().startOf('week').toDate();
-        startOfWeek = new Date(startOfWeek.setDate(startOfWeek.getDate() + this.state.week)) + ''
-        let endOffWeek = moment().endOf('week').toDate();
-        endOffWeek = new Date(endOffWeek.setDate(endOffWeek.getDate() + this.state.week)) + ''
-        return `${startOfWeek.split(' ')[1]} ${startOfWeek.split(' ')[3]} - ${endOffWeek.split(' ')[1]} ${endOffWeek.split(' ')[3]}`
     }
 
     render() {
         return (
             <>
                 <Header
-                    getPrevWeek={this.getPrevWeek}
-                    getNextWeek={this.getNextWeek}
-                    todayButton={this.todayButton}
+                    getPrevWeek={this.props.getPrevWeek}
+                    getNextWeek={this.props.getNextWeek}
+                    todayButton={this.props.todayButton}
                     showPopup={this.props.showPopup}
-                    currentMonthAndYear={this.currentMonthAndYear()}
+                    currentMonthAndYear={this.props.currentMonthAndYear}
                 />
                 <nav className="days-navigation">
-                    {arr.map((elem, index) => { return <Day index={index} getMonday={this.getMonday} /> })}
+                    <div className="week">
+                        {arr.map((elem, index) => {
+                            return <Day
+                                index={index}
+                                getMonday={this.props.getMonday}
+                            />
+                        })}
+                    </div>
                 </nav>
             </>
         )
@@ -71,11 +45,19 @@ class Day extends React.Component {
         return new Date((this.props.getMonday()).setDate(this.props.getMonday().getDate() + this.props.index)) + '';
     }
 
+    marginTop = () => {
+        return `${x.split(':')[0] * 60 + +(x.split(':')[1])}`
+    }
+
     render() {
         return (
             <div className="day">
                 <div className="day-name">{this.getDay().split(' ')[0]}</div>
                 <div className="day-number">{this.getDay().split(' ')[2]}</div>
+                {new Date().getDate() + '' == this.getDay().split(' ')[2]
+                    ? <RedLine top={this.marginTop} />
+                    : <></>
+                }
             </div>
         )
     }

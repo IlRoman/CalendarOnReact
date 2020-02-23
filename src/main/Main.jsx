@@ -3,11 +3,11 @@ import Rows from './calendar/Rows'
 import Sidebar from './sidebar/Sidebar'
 import './main.scss';
 
-const Main = () => {
+const Main = ({ week, showPopup }) => {
     return (
         <section className="main">
             <Sidebar />
-            <Rows />
+            <Rows week={week} showPopup={showPopup} />
         </section>
     )
 }
