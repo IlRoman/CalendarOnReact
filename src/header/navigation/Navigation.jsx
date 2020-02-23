@@ -30,10 +30,30 @@ class Navigation extends React.Component {
         })
     }
 
+    todayButton = () => {
+        this.setState({
+            week: 0,
+        })
+    }
+
+    currentMonthAndYear = () => {
+        let startOfWeek = moment().startOf('week').toDate();
+        startOfWeek = new Date(startOfWeek.setDate(startOfWeek.getDate() + this.state.week)) + ''
+        let endOffWeek = moment().endOf('week').toDate();
+        endOffWeek = new Date(endOffWeek.setDate(endOffWeek.getDate() + this.state.week)) + ''
+        return `${startOfWeek.split(' ')[1]} ${startOfWeek.split(' ')[3]} - ${endOffWeek.split(' ')[1]} ${endOffWeek.split(' ')[3]}`
+    }
+
     render() {
         return (
             <>
-                <Header getPrevWeek={this.getPrevWeek} getNextWeek={this.getNextWeek} />
+                <Header
+                    getPrevWeek={this.getPrevWeek}
+                    getNextWeek={this.getNextWeek}
+                    todayButton={this.todayButton}
+                    showPopup={this.props.showPopup}
+                    currentMonthAndYear={this.currentMonthAndYear()}
+                />
                 <nav className="days-navigation">
                     {arr.map((elem, index) => { return <Day index={index} getMonday={this.getMonday} /> })}
                 </nav>

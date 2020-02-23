@@ -1,11 +1,11 @@
 import React from 'react';
 import './header.scss';
 
-const Header = ({ getPrevWeek, getNextWeek }) => {
+const Header = ({ getPrevWeek, getNextWeek, todayButton, showPopup, currentMonthAndYear }) => {
     return (
         <header className="header">
             <nav className="header-navbar">
-                <button className="create-button create-event">
+                <button className="create-button create-event" onClick={showPopup}>
                     <div className="button-create-event">
                         <svg className="create-event" width="36" height="36" viewBox="0 0 36 36">
                             <path className="create-event" fill="#34A853" d="M16 16v14h4V20z"></path>
@@ -17,9 +17,9 @@ const Header = ({ getPrevWeek, getNextWeek }) => {
                     </div>
                     <span className="create-button__text create-event">Create</span>
                 </button>
-                <button className="today-button">
+                <button className="today-button" onClick={todayButton}>
                     Today
-            </button>
+                </button>
                 <div className="arrow-button">
                     <button className="arrow-button__prev button-style" onClick={getPrevWeek}>
                         <i className="material-icons arrow-button__size">keyboard_arrow_left</i>
@@ -29,8 +29,8 @@ const Header = ({ getPrevWeek, getNextWeek }) => {
                     </button>
                 </div>
                 <span className="dates">
-                    November - December 2019
-            </span>
+                    {currentMonthAndYear}
+                </span>
             </nav>
         </header>
     )
