@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.scss';
 
-const Header = () => {
+const Header = ({ getPrevWeek, getNextWeek }) => {
     return (
         <header className="header">
             <nav className="header-navbar">
@@ -21,10 +21,10 @@ const Header = () => {
                     Today
             </button>
                 <div className="arrow-button">
-                    <button className="arrow-button__prev button-style">
+                    <button className="arrow-button__prev button-style" onClick={getPrevWeek}>
                         <i className="material-icons arrow-button__size">keyboard_arrow_left</i>
                     </button>
-                    <button className="arrow-button__next button-style">
+                    <button className="arrow-button__next button-style" onClick={getNextWeek}>
                         <i className="material-icons arrow-button__size ">keyboard_arrow_right</i>
                     </button>
                 </div>
