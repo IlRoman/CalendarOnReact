@@ -55,7 +55,7 @@ class Day extends React.Component {
                 <div className="day-name">{this.getDay().split(' ')[0]}</div>
                 <div className="day-number">{this.getDay().split(' ')[2]}</div>
                 {new Date().getDate() + '' == this.getDay().split(' ')[2]
-                    ? <RedLine top={this.marginTop} />
+                    ? <RedLine top={this.marginTop()} />
                     : <></>
                 }
             </div>

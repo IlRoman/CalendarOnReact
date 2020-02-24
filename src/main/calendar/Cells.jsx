@@ -20,8 +20,7 @@ class Cells extends React.Component {
                     return (
                         <div
                             className='emptyCell'
-                            date={this.getDate() + index}
-                            onClick={this.props.showPopup}
+                            onClick={() => this.props.showPopup(this.props.time, this.getDate() + index)}
                         >
                         </div>
                     )

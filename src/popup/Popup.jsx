@@ -6,10 +6,6 @@ class Popup extends React.Component {
         super(props);
         this.state = {
             color: '#4183f1',
-            startDate: this.props.eventDate,
-            startTime: this.props.eventTime,
-            endTime: this.props.eventTime,
-            endDate: this.props.eventDate,
             text: '',
         }
     }
@@ -23,6 +19,21 @@ class Popup extends React.Component {
 
     createDate = () => {
         alert(this.props.popupDate)
+    }
+
+    endTime = () => {
+        let endTimeArr = this.props.eventTime.split('')
+        if (+endTimeArr[1] == 9) {
+            endTimeArr[0] = +endTimeArr[0] + 1;
+            endTimeArr[1] = 0;
+        } else {
+            endTimeArr[1] = +endTimeArr[1] + 1;
+        }
+        return endTimeArr.join('')
+    }
+
+    startDate = (date) => {
+        return `2020-02-${date}`
     }
 
     render() {
@@ -42,12 +53,12 @@ class Popup extends React.Component {
 
                     <div className="date-block ">
                         <i className="Tiny material-icons">access_time</i>
-                        <input className="start-date input-style" type="date" name="startDate" value={this.state.startDate} onChange={this.handleChange} />
+                        <input className="start-date input-style" type="date" name="startDate" value={this.startDate(this.props.eventDate)} onChange={this.handleChange} />
 
-                        <input type="time" className="start-time time-list input-style " name="startTime" value={this.state.startTime} onChange={this.handleChange} />
-                        <input type="time" className="end-time time-list input-style " name="endTime" value={this.state.endTime} onChange={this.handleChange} />
+                        <input type="time" className="start-time time-list input-style " name="startTime" value={this.props.eventTime} onChange={this.handleChange} />
+                        <input type="time" className="end-time time-list input-style " name="endTime" value={this.endTime()} onChange={this.handleChange} />
 
-                        <input className="end-date input-style" type="date" name="endTime" value={this.state.endTime} onChange={this.handleChange} />
+                        <input className="end-date input-style" type="date" name="endTime" value={this.startDate(this.props.eventDate)} onChange={this.handleChange} />
                     </div>
                     <div className="description ">
                         <i className="Tiny material-icons ">format_align_left

@@ -46,11 +46,11 @@ class App extends React.Component {
         return `${startOfWeek.split(' ')[1]} ${startOfWeek.split(' ')[3]} - ${endOffWeek.split(' ')[1]} ${endOffWeek.split(' ')[3]}`
     }
 
-    showPopup = (element) => {
+    showPopup = (time, date) => {
         this.setState({
             popup: !this.state.popup,
-            // eventTime: element.target.closest('.emptyRow').time,
-            // eventDate: element.target.date,
+            eventTime: time,
+            eventDate: date,
         })
     }
 

@@ -8,13 +8,14 @@ const Rows = ({ week, showPopup }) => {
         <div className="calendar-visualization">
             {arr.map((elem, index) => {
                 return (
-                    < div
-                        className='emptyRow'
-                        time={index < 10
-                            ? `0${index + 1}:00`
-                            : `${index + 1}:00`}
-                    >
-                        <Cells week={week} showPopup={showPopup} />
+                    < div className='emptyRow'>
+                        <Cells
+                            week={week}
+                            showPopup={showPopup}
+                            time={index < 10
+                                ? `0${index + 1}:00`
+                                : `${index + 1}:00`}
+                        />
                     </div>
                 )
             })}
