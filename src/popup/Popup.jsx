@@ -1,6 +1,6 @@
 import React from 'react';
 import './popup.scss';
-import saveEvent from '../functions/saveEvent.js';
+import { postToServer, deleteNewEvent } from '../gateways/gateways.js';
 
 class Popup extends React.Component {
     constructor(props) {
@@ -69,10 +69,10 @@ class Popup extends React.Component {
                             placeholder="Add description" onChange={this.handleChange} value={this.state.text}></textarea>
                     </div>
                     <div className="control ">
-                        <button className="delete-event ">
+                        <button className="delete-event" onClick={() => deleteNewEvent()}>
                             delete
                         </button>
-                        <button type="submit" className="submit-button " onClick={() => saveEvent(this.state)}>Save</button>
+                        <button type="submit" className="submit-button " onClick={() => postToServer(this.state)}>Save</button>
                     </div>
 
                 </form>
