@@ -1,5 +1,6 @@
 import React from 'react';
 import './popup.scss';
+import saveEvent from '../functions/saveEvent.js';
 
 class Popup extends React.Component {
     constructor(props) {
@@ -7,6 +8,10 @@ class Popup extends React.Component {
         this.state = {
             color: '#4183f1',
             text: '',
+            startDate: '2020-02-02',
+            startTime: '2020-02-02',
+            endTime: '00:00',
+            endDate: '2020-02-02',
         }
     }
 
@@ -53,24 +58,21 @@ class Popup extends React.Component {
 
                     <div className="date-block ">
                         <i className="Tiny material-icons">access_time</i>
-                        <input className="start-date input-style" type="date" name="startDate" value={this.startDate(this.props.eventDate)} onChange={this.handleChange} />
-
-                        <input type="time" className="start-time time-list input-style " name="startTime" value={this.props.eventTime} onChange={this.handleChange} />
-                        <input type="time" className="end-time time-list input-style " name="endTime" value={this.endTime()} onChange={this.handleChange} />
-
-                        <input className="end-date input-style" type="date" name="endTime" value={this.startDate(this.props.eventDate)} onChange={this.handleChange} />
+                        <input className="start-date input-style" type="date" name="startDate" value={this.state.startDate} onChange={this.handleChange} />
+                        <input type="time" className="start-time time-list input-style " name="startTime" value={this.state.startTime} onChange={this.handleChange} />
+                        <input type="time" className="end-time time-list input-style " name="endTime" value={this.state.endTime} onChange={this.handleChange} />
+                        <input className="end-date input-style" type="date" name="endDate" value={this.state.endDate} onChange={this.handleChange} />
                     </div>
                     <div className="description ">
-                        <i className="Tiny material-icons ">format_align_left
-            </i>
+                        <i className="Tiny material-icons ">format_align_left</i>
                         <textarea className="description-input " name="text" cols="42 " rows="4 "
                             placeholder="Add description" onChange={this.handleChange} value={this.state.text}></textarea>
                     </div>
                     <div className="control ">
                         <button className="delete-event ">
-                            <i className="Tiny material-icons material-icons-delete"></i>
+                            delete
                         </button>
-                        <button type="submit" className="submit-button ">Save</button>
+                        <button type="submit" className="submit-button " onClick={() => saveEvent(this.state)}>Save</button>
                     </div>
 
                 </form>

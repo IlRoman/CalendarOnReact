@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            popup: true,
+            popup: false,
             week: 0,
             eventTime: '',
             eventDate: '',
@@ -67,13 +67,12 @@ class App extends React.Component {
                     currentMonthAndYear={this.currentMonthAndYear()}
                 />
                 <Main week={this.state.week} showPopup={this.showPopup} />
-                <Popup
-                    newClass={this.state.popup
-                        ? 'display'
-                        : ''}
-                    eventTime={this.state.eventTime}
-                    eventDate={this.state.eventDate}
-                />
+                {this.state.popup
+                    ? <Popup
+                        eventTime={this.state.eventTime}
+                        eventDate={this.state.eventDate}
+                    />
+                    : ''}
             </>
         )
     }

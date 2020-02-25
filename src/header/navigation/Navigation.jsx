@@ -1,14 +1,28 @@
 import React from 'react';
 import Header from '../Header';
 import RedLine from '../../redLine/RedLine';
+import { getEventsList } from '../../gateways/gateways.js'
+import ActiveEvent from '../../activeEvents/ActiveEvent'
 import './navigation.scss'
 
 let arr = Array(7).fill('0');
-let x = (new Date() + '').split(' ')[4]
+let findMargin = (new Date() + '').split(' ')[4]
 
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            array: []
+        }
+    }
+
+    componentDidMount() {
+        getEventsList()
+            .then(result => {
+                this.setState({
+                    array: result
+                })
+            })
     }
 
     render() {
@@ -24,10 +38,13 @@ class Navigation extends React.Component {
                 <nav className="days-navigation">
                     <div className="week">
                         {arr.map((elem, index) => {
-                            return <Day
-                                index={index}
-                                getMonday={this.props.getMonday}
-                            />
+                            return (
+                                <Day
+                                    array={this.state.array}
+                                    index={index}
+                                    getMonday={this.props.getMonday}
+                                />
+                            )
                         })}
                     </div>
                 </nav>
@@ -41,22 +58,39 @@ class Day extends React.Component {
         super(props);
     }
 
+    findActiveEvents = () => {
+        let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() == this.getDay().getDate())
+        let activeEvents = newArr.map((event) => {
+            return (<ActiveEvent
+                _id={event._id}
+                color={event.color}
+                text={event.text}
+                startDate={event.startDate}
+                startTime={event.startTime}
+                endTime={event.endTime}
+                endDate={event.endDate}
+            />)
+        })
+        return activeEvents
+    }
+
     getDay = () => {
-        return new Date((this.props.getMonday()).setDate(this.props.getMonday().getDate() + this.props.index)) + '';
+        return new Date((this.props.getMonday()).setDate(this.props.getMonday().getDate() + this.props.index));
     }
 
     marginTop = () => {
-        return `${x.split(':')[0] * 60 + +(x.split(':')[1])}`
+        return `${findMargin.split(':')[0] * 60 + +(findMargin.split(':')[1])}`
     }
 
     render() {
         return (
             <div className="day">
-                <div className="day-name">{this.getDay().split(' ')[0]}</div>
-                <div className="day-number">{this.getDay().split(' ')[2]}</div>
-                {new Date().getDate() + '' == this.getDay().split(' ')[2]
+                <div className="day-name">{(this.getDay() + '').split(' ')[0]}</div>
+                <div className="day-number">{(this.getDay() + '').split(' ')[2]}</div>
+                {this.findActiveEvents()}
+                {new Date().getDate() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDate()
                     ? <RedLine top={this.marginTop()} />
-                    : <></>
+                    : ''
                 }
             </div>
         )
