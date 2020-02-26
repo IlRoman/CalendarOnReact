@@ -6,10 +6,6 @@ import './navigation.scss'
 let arr = Array(7).fill('0');
 
 class Navigation extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <>

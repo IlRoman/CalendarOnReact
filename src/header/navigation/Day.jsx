@@ -5,13 +5,9 @@ import ActiveEvent from '../../activeEvents/ActiveEvent'
 let findMargin = (new Date() + '').split(' ')[4]
 
 class Day extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     findActiveEvents = () => {
         let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() === this.getDay().getDate())
-        newArr = newArr.filter(event => (new Date(event.startDate) + '').split(' ')[1] == (this.getDay() + '').split(' ')[1])
+        newArr = newArr.filter(event => (new Date(event.startDate) + '').split(' ')[1] === (this.getDay() + '').split(' ')[1])
         let activeEvents = newArr.map((event) => {
             return (<ActiveEvent
                 key={Math.random()}
