@@ -59,13 +59,13 @@ class App extends React.Component {
 
     getPrevWeek = () => {
         this.setState({
-            week: this.state.week -= 7,
+            week: this.state.week - 7,
         })
     }
 
     getNextWeek = () => {
         this.setState({
-            week: this.state.week += 7,
+            week: this.state.week + 7,
         })
     }
 
@@ -108,7 +108,6 @@ class App extends React.Component {
                     getPrevWeek={this.getPrevWeek}
                     getNextWeek={this.getNextWeek}
                     todayButton={this.todayButton}
-                    showPopup={this.showPopup}
                     currentMonthAndYear={this.currentMonthAndYear()}
                 />
                 <Main week={this.state.week} showPopup={this.showPopup} />
