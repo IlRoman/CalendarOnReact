@@ -1,4 +1,4 @@
-const baseUrl = 'https://crudcrud.com/api/811a1e23f285493089f63a97303735e2/tasks'
+const baseUrl = 'https://crudcrud.com/api/e27e07e57ec24e61b60b6c93dd08865b/tasks'
 
 export const getEventsList = () => {
     return fetch(baseUrl)
