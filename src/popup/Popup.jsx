@@ -1,6 +1,6 @@
 import React from 'react';
 import './popup.scss';
-import { postToServer, deleteNewEvent } from '../gateways/gateways.js';
+import { postToServer } from '../gateways/gateways.js';
 
 class Popup extends React.Component {
     constructor(props) {
@@ -8,10 +8,10 @@ class Popup extends React.Component {
         this.state = {
             color: '#4183f1',
             text: '',
-            startDate: '2020-02-02',
-            startTime: '2020-02-02',
+            startDate: '2020-02-26',
+            startTime: '00:00',
             endTime: '00:00',
-            endDate: '2020-02-02',
+            endDate: '2020-02-26',
         }
     }
 
@@ -44,10 +44,10 @@ class Popup extends React.Component {
     render() {
         return (
             <section className={`popup ${this.props.newClass}`}>
-                <form className="popup__form">
-                    <button className="close material-icons">
+                <div className="popup__form">
+                    <button className="close material-icons" onClick={this.props.closePopup}>
                         close
-                </button>
+                    </button>
                     <input name="title" className="input__name" type="text" placeholder="Add title" />
                     <div className="color-picker">
                         <label className="color-picker_label">
@@ -69,17 +69,23 @@ class Popup extends React.Component {
                             placeholder="Add description" onChange={this.handleChange} value={this.state.text}></textarea>
                     </div>
                     <div className="control ">
-                        <button className="delete-event" onClick={() => deleteNewEvent()}>
+                        <button
+                            className="delete-event"
+                            onClick={() => this.props.delete(this.props.id)}
+                        >
                             delete
                         </button>
-                        <button type="submit" className="submit-button " onClick={() => postToServer(this.state)}>Save</button>
+                        <button
+                            className="submit-button "
+                            onClick={() => {
+                                postToServer(this.state)
+                                    .then(this.props.closePopup());
+                            }}>
+                            Save
+                            </button>
                     </div>
-
-                </form>
-                <span className="event__name "></span>
-                <span className="event__description "></span>
-
-            </section>
+                </div>
+            </section >
         )
     }
 }

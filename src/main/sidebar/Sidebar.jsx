@@ -4,9 +4,9 @@ const Sidebar = () => {
     let arr = Array(24).fill('0');
 
     return (
-        <div className="timing">
+        <div className="timing" key={Math.random()}>
             {arr.map((elem, index) =>
-                elem = <div className="timing__blocks">
+                elem = <div className="timing__blocks" key={Math.random()}>
                     <span className="clock">
                         {index + 1}
                     </span>

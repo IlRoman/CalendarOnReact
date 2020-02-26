@@ -3,6 +3,7 @@ import Navigation from './header/navigation/Navigation'
 import Main from './main/Main'
 import Popup from './popup/Popup';
 import moment from 'moment';
+import { getEventsList, deleteEvent } from './gateways/gateways'
 
 class App extends React.Component {
     constructor(props) {
@@ -12,7 +13,39 @@ class App extends React.Component {
             week: 0,
             eventTime: '',
             eventDate: '',
+            array: []
         }
+    }
+
+    componentDidMount() {
+        getEventsList()
+            .then(result => {
+                this.setState({
+                    array: result
+                })
+            })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.popup !== prevState.popup) {
+            getEventsList()
+                .then(result => {
+                    this.setState({
+                        array: result
+                    })
+                })
+        }
+    }
+
+    delete = (id) => {
+        deleteEvent(id)
+            .then(getEventsList()
+                .then(result => {
+                    this.setState({
+                        array: result,
+                        popup: !this.state.popup,
+                    })
+                }))
     }
 
     getMonday = () => {
@@ -46,11 +79,18 @@ class App extends React.Component {
         return `${startOfWeek.split(' ')[1]} ${startOfWeek.split(' ')[3]} - ${endOffWeek.split(' ')[1]} ${endOffWeek.split(' ')[3]}`
     }
 
-    showPopup = (time, date) => {
+    showPopup = (time, date, id) => {
         this.setState({
             popup: !this.state.popup,
             eventTime: time,
             eventDate: date,
+            id: id,
+        })
+    }
+
+    closePopup = () => {
+        this.setState({
+            popup: !this.state.popup,
         })
     }
 
@@ -58,6 +98,7 @@ class App extends React.Component {
         return (
             <>
                 <Navigation
+                    array={this.state.array}
                     getMonday={this.getMonday}
                     showPopup={this.showPopup}
                     getPrevWeek={this.getPrevWeek}
@@ -69,8 +110,11 @@ class App extends React.Component {
                 <Main week={this.state.week} showPopup={this.showPopup} />
                 {this.state.popup
                     ? <Popup
+                        closePopup={this.closePopup}
                         eventTime={this.state.eventTime}
                         eventDate={this.state.eventDate}
+                        id={this.state.id}
+                        delete={this.delete}
                     />
                     : ''}
             </>

@@ -20,7 +20,12 @@ class ActiveEvent extends React.Component {
         return (
             <div
                 className='active_event'
-                style={{ height: this.getHeight(), backgroundColor: this.props.color, marginTop: this.getPosition() }}
+                style={{
+                    height: this.getHeight(),
+                    backgroundColor: this.props.color,
+                    marginTop: this.getPosition()
+                }}
+                onClick={() => this.props.showPopup('00:00', '2020-02-02', this.props._id)}
             >
                 {this.props.text}
             </div >

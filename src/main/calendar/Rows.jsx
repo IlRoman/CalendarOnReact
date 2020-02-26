@@ -8,8 +8,9 @@ const Rows = ({ week, showPopup }) => {
         <div className="calendar-visualization">
             {arr.map((elem, index) => {
                 return (
-                    < div className='emptyRow'>
+                    < div className='emptyRow' key={Math.random()}>
                         <Cells
+
                             week={week}
                             showPopup={showPopup}
                             time={index < 10

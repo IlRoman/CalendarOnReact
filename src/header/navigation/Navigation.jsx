@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../Header';
 import RedLine from '../../redLine/RedLine';
-import { getEventsList } from '../../gateways/gateways.js'
 import ActiveEvent from '../../activeEvents/ActiveEvent'
 import './navigation.scss'
 
@@ -11,18 +10,6 @@ let findMargin = (new Date() + '').split(' ')[4]
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            array: []
-        }
-    }
-
-    componentDidMount() {
-        getEventsList()
-            .then(result => {
-                this.setState({
-                    array: result
-                })
-            })
     }
 
     render() {
@@ -40,9 +27,11 @@ class Navigation extends React.Component {
                         {arr.map((elem, index) => {
                             return (
                                 <Day
-                                    array={this.state.array}
+                                    key={Math.random()}
+                                    array={this.props.array}
                                     index={index}
                                     getMonday={this.props.getMonday}
+                                    showPopup={this.props.showPopup}
                                 />
                             )
                         })}
@@ -62,6 +51,7 @@ class Day extends React.Component {
         let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() == this.getDay().getDate())
         let activeEvents = newArr.map((event) => {
             return (<ActiveEvent
+                key={Math.random()}
                 _id={event._id}
                 color={event.color}
                 text={event.text}
@@ -69,6 +59,7 @@ class Day extends React.Component {
                 startTime={event.startTime}
                 endTime={event.endTime}
                 endDate={event.endDate}
+                showPopup={this.props.showPopup}
             />)
         })
         return activeEvents

@@ -1,4 +1,4 @@
-const baseUrl = 'https://crudcrud.com/api/c571ed767db045e8b45322e5ee7733a9/tasks'
+const baseUrl = 'https://crudcrud.com/api/811a1e23f285493089f63a97303735e2/tasks'
 
 export const getEventsList = () => {
     return fetch(baseUrl)
@@ -25,7 +25,7 @@ export const updateNewTask = (eventId, upDateEventData) => {
     })
 }
 
-export const deleteNewEvent = (eventId) => {
+export const deleteEvent = (eventId) => {
     return fetch(`${baseUrl}/${eventId}`, {
         method: 'DELETE',
         headers: {
