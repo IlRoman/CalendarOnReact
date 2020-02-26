@@ -24,6 +24,7 @@ class App extends React.Component {
                     array: result
                 })
             })
+            .catch(() => alert('Internal Server Error. Can\'t display events'))
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -34,6 +35,7 @@ class App extends React.Component {
                         array: result
                     })
                 })
+                .catch(() => alert('Internal Server Error. Can\'t display events'))
         }
     }
 
@@ -45,7 +47,9 @@ class App extends React.Component {
                         array: result,
                         popup: !this.state.popup,
                     })
-                }))
+                })
+                .catch(() => alert('Internal Server Error. Can\'t display events'))
+            )
     }
 
     getMonday = () => {

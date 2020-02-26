@@ -28,7 +28,7 @@ class Popup extends React.Component {
 
     endTime = () => {
         let endTimeArr = this.props.eventTime.split('')
-        if (+endTimeArr[1] == 9) {
+        if (+endTimeArr[1] === 9) {
             endTimeArr[0] = +endTimeArr[0] + 1;
             endTimeArr[1] = 0;
         } else {
