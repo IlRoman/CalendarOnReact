@@ -10,7 +10,8 @@ class Day extends React.Component {
     }
 
     findActiveEvents = () => {
-        let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() == this.getDay().getDate())
+        let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() === this.getDay().getDate())
+        newArr = newArr.filter(event => (new Date(event.startDate) + '').split(' ')[1] == (this.getDay() + '').split(' ')[1])
         let activeEvents = newArr.map((event) => {
             return (<ActiveEvent
                 key={Math.random()}
