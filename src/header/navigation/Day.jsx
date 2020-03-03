@@ -32,17 +32,21 @@ class Day extends React.Component {
         return `${findMargin.split(':')[0] * 60 + +(findMargin.split(':')[1])}`
     }
 
+    getDay = () => {
+        return (new Date().getDate() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDate() &&
+            new Date().getDay() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDay()
+            ? <RedLine top={this.marginTop()} />
+            : ''
+        )
+    }
+
     render() {
         return (
             <div className="day">
                 <div className="day-name">{(this.getDay() + '').split(' ')[0]}</div>
                 <div className="day-number">{(this.getDay() + '').split(' ')[2]}</div>
                 {this.findActiveEvents()}
-                {new Date().getDate() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDate() &&
-                    new Date().getDay() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDay()
-                    ? <RedLine top={this.marginTop()} />
-                    : ''
-                }
+                {this.getDay()}
             </div>
         )
     }

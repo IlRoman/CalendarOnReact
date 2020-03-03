@@ -6,7 +6,7 @@ const Sidebar = () => {
     return (
         <div className="timing" key={Math.random()}>
             {arr.map((elem, index) =>
-                elem = <div className="timing__blocks" key={Math.random()}>
+                elem = <div className="timing__blocks">
                     <span className="clock">
                         {index + 1}
                     </span>

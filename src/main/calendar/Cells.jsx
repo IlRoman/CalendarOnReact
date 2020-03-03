@@ -18,8 +18,7 @@ class Cells extends React.Component {
                             key={Math.random()}
                             className='emptyCell'
                             onClick={() => this.props.showPopup(this.props.time, this.getDate() + index)}
-                        >
-                        </div>
+                        />
                     )
                 }
                 )}
