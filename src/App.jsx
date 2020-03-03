@@ -111,15 +111,13 @@ class App extends React.Component {
                     currentMonthAndYear={this.currentMonthAndYear()}
                 />
                 <Main week={this.state.week} showPopup={this.showPopup} />
-                {this.state.popup
-                    ? <Popup
-                        closePopup={this.closePopup}
-                        eventTime={this.state.eventTime}
-                        eventDate={this.state.eventDate}
-                        id={this.state.id}
-                        delete={this.delete}
-                    />
-                    : ''}
+                {this.state.popup && <Popup
+                    closePopup={this.closePopup}
+                    eventTime={this.state.eventTime}
+                    eventDate={this.state.eventDate}
+                    id={this.state.id}
+                    delete={this.delete}
+                />}
             </>
         )
     }
