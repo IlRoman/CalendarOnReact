@@ -1,4 +1,4 @@
-const baseUrl = 'https://crudcrud.com/api/e27e07e57ec24e61b60b6c93dd08865b/tasks'
+const baseUrl = 'https://5e720541942d92001611a8f2.mockapi.io/api/v1/Calendar'
 
 export const getEventsList = () => {
     return fetch(baseUrl)

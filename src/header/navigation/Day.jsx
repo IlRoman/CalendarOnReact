@@ -6,12 +6,12 @@ let findMargin = (new Date() + '').split(' ')[4]
 
 class Day extends React.Component {
     findActiveEvents = () => {
-        let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() === this.getDay().getDate())
-        newArr = newArr.filter(event => (new Date(event.startDate) + '').split(' ')[1] === (this.getDay() + '').split(' ')[1])
+        let newArr = this.props.array.filter(event => new Date(event.startDate).getDate() === this.getCurrentDay().getDate())
+        newArr = newArr.filter(event => (new Date(event.startDate) + '').split(' ')[1] === (this.getCurrentDay() + '').split(' ')[1])
         let activeEvents = newArr.map((event) => {
             return (<ActiveEvent
                 key={Math.random()}
-                _id={event._id}
+                id={event.id}
                 color={event.color}
                 text={event.text}
                 startDate={event.startDate}
@@ -24,7 +24,7 @@ class Day extends React.Component {
         return activeEvents
     }
 
-    getDay = () => {
+    getCurrentDay = () => {
         return new Date((this.props.getMonday()).setDate(this.props.getMonday().getDate() + this.props.index));
     }
 
@@ -32,7 +32,7 @@ class Day extends React.Component {
         return `${findMargin.split(':')[0] * 60 + +(findMargin.split(':')[1])}`
     }
 
-    getDay = () => {
+    getDayFunc = () => {
         return (new Date().getDate() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDate() &&
             new Date().getDay() === new Date(this.props.getMonday().setDate(this.props.getMonday().getDate() + this.props.index)).getDay()
             ? <RedLine top={this.marginTop()} />
@@ -43,10 +43,10 @@ class Day extends React.Component {
     render() {
         return (
             <div className="day">
-                <div className="day-name">{(this.getDay() + '').split(' ')[0]}</div>
-                <div className="day-number">{(this.getDay() + '').split(' ')[2]}</div>
+                <div className="day-name">{(this.getDayFunc() + '').split(' ')[0]}</div>
+                <div className="day-number">{(this.getDayFunc() + '').split(' ')[2]}</div>
                 {this.findActiveEvents()}
-                {this.getDay()}
+                {this.getDayFunc()}
             </div>
         )
     }

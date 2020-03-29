@@ -21,7 +21,7 @@ class ActiveEvent extends React.Component {
                     backgroundColor: this.props.color,
                     marginTop: this.getPosition()
                 }}
-                onClick={() => this.props.showPopup('00:00', '2020-02-02', this.props._id)}
+                onClick={() => this.props.showPopup('00:00', '2020-02-02', this.props.id)}
             >
                 {this.props.text}
             </div >
