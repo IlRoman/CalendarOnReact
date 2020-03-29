@@ -43,8 +43,8 @@ class Day extends React.Component {
     render() {
         return (
             <div className="day">
-                <div className="day-name">{(this.getDayFunc() + '').split(' ')[0]}</div>
-                <div className="day-number">{(this.getDayFunc() + '').split(' ')[2]}</div>
+                <div className="day-name">{(this.getCurrentDay() + '').split(' ')[0]}</div>
+                <div className="day-number">{(this.getCurrentDay() + '').split(' ')[2]}</div>
                 {this.findActiveEvents()}
                 {this.getDayFunc()}
             </div>
