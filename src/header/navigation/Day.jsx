@@ -41,7 +41,6 @@ class Day extends React.Component {
     }
 
     currentDayStyle = () => {
-        // console.log((new Date() + '').split(' ')[2])
         if ((this.getCurrentDay() + '').split(' ')[2] === (new Date() + '').split(' ')[2] &&
             ((this.getCurrentDay() + '').split(' ')[0]) === (new Date() + '').split(' ')[0]) {
             return 'current-day'
