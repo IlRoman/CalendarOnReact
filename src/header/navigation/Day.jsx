@@ -40,11 +40,19 @@ class Day extends React.Component {
         )
     }
 
+    currentDayStyle = () => {
+        // console.log((new Date() + '').split(' ')[2])
+        if ((this.getCurrentDay() + '').split(' ')[2] === (new Date() + '').split(' ')[2] &&
+            ((this.getCurrentDay() + '').split(' ')[0]) === (new Date() + '').split(' ')[0]) {
+            return 'current-day'
+        } else return ''
+    }
+
     render() {
         return (
             <div className="day">
                 <div className="day-name">{(this.getCurrentDay() + '').split(' ')[0]}</div>
-                <div className="day-number">{(this.getCurrentDay() + '').split(' ')[2]}</div>
+                <div className={`day-number ${this.currentDayStyle()}`}>{(this.getCurrentDay() + '').split(' ')[2]}</div>
                 {this.findActiveEvents()}
                 {this.getDayFunc()}
             </div>
