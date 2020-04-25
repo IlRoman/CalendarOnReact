@@ -15,7 +15,7 @@ class Cells extends React.Component {
                 {arr.map((elem, index) => {
                     return (
                         <div
-                            key={Math.random()}
+                            key={index}
                             className='emptyCell'
                             onClick={() => this.props.showPopup(this.props.time, this.getDate() + index)}
                         />
