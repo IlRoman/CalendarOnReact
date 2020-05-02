@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/CalendarOnReact/static/css/main.6369fbb2.chunk.css",
-    "main.js": "/CalendarOnReact/static/js/main.28f4f78d.chunk.js",
-    "main.js.map": "/CalendarOnReact/static/js/main.28f4f78d.chunk.js.map",
+    "main.js": "/CalendarOnReact/static/js/main.d56bc34d.chunk.js",
+    "main.js.map": "/CalendarOnReact/static/js/main.d56bc34d.chunk.js.map",
     "runtime-main.js": "/CalendarOnReact/static/js/runtime-main.40f02486.js",
     "runtime-main.js.map": "/CalendarOnReact/static/js/runtime-main.40f02486.js.map",
     "static/js/2.e15dc63b.chunk.js": "/CalendarOnReact/static/js/2.e15dc63b.chunk.js",
     "static/js/2.e15dc63b.chunk.js.map": "/CalendarOnReact/static/js/2.e15dc63b.chunk.js.map",
     "index.html": "/CalendarOnReact/index.html",
-    "precache-manifest.3c7f0dd9ba434eb0abcf216b2bcd5258.js": "/CalendarOnReact/precache-manifest.3c7f0dd9ba434eb0abcf216b2bcd5258.js",
+    "precache-manifest.0f266a3622673c4f9e2d79e72e2964e9.js": "/CalendarOnReact/precache-manifest.0f266a3622673c4f9e2d79e72e2964e9.js",
     "service-worker.js": "/CalendarOnReact/service-worker.js",
     "static/css/main.6369fbb2.chunk.css.map": "/CalendarOnReact/static/css/main.6369fbb2.chunk.css.map",
     "static/js/2.e15dc63b.chunk.js.LICENSE.txt": "/CalendarOnReact/static/js/2.e15dc63b.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.40f02486.js",
     "static/js/2.e15dc63b.chunk.js",
     "static/css/main.6369fbb2.chunk.css",
-    "static/js/main.28f4f78d.chunk.js"
+    "static/js/main.d56bc34d.chunk.js"
   ]
 }
