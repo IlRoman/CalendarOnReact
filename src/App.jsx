@@ -3,7 +3,7 @@ import Navigation from './header/navigation/Navigation'
 import Main from './main/Main'
 import Popup from './popup/Popup';
 import moment from 'moment';
-import { getEventsList, deleteEvent } from './gateways/gateways'
+import { getEventsList, deleteEvent, postToServer } from './gateways/gateways'
 
 class App extends React.Component {
     constructor(props) {
@@ -13,7 +13,8 @@ class App extends React.Component {
             week: 0,
             eventTime: '',
             eventDate: '',
-            array: []
+            array: [],
+            date: '',
         }
     }
 
@@ -39,6 +40,19 @@ class App extends React.Component {
         }
     }
 
+    createTask = (formData) => {
+        postToServer(formData)
+            .then(getEventsList()
+                .then(result => {
+                    this.setState({
+                        array: result,
+                        popup: !this.state.popup,
+                    })
+                })
+                .catch(() => alert('Internal Server Error. Can\'t display events'))
+            )
+    }
+
     delete = (id) => {
         deleteEvent(id)
             .then(getEventsList()
@@ -57,15 +71,24 @@ class App extends React.Component {
         return new Date(startOfWeek.setDate(startOfWeek.getDate() + this.state.week));
     }
 
+    getActualDate = (eventDate, index) => {
+        let startOfWeek = moment().startOf('week').toDate();
+        let date = new Date(startOfWeek.setDate(startOfWeek.getDate() + this.state.week + index)) + ''
+        let month = new Date(date).getMonth() + 1
+        return `${date.split(' ')[3]}-${month <= 9 ? "0" + month : month}-${eventDate}`
+    }
+
     getPrevWeek = () => {
         this.setState({
             week: this.state.week - 7,
+            date: this.getActualDate(this.state.eventDate, 0)
         })
     }
 
     getNextWeek = () => {
         this.setState({
             week: this.state.week + 7,
+            date: this.getActualDate(this.state.eventDate, 0),
         })
     }
 
@@ -83,12 +106,15 @@ class App extends React.Component {
         return `${startOfWeek.split(' ')[1]} ${startOfWeek.split(' ')[3]} - ${endOffWeek.split(' ')[1]} ${endOffWeek.split(' ')[3]}`
     }
 
-    showPopup = (time, date, id) => {
+    showPopup = (time, date, id, index) => {
+        const eventDate = date <= 9 ? `0${date}` : date;
+        const eventTime = time === '010:00' ? '10:00' : time
         this.setState({
-            popup: !this.state.popup,
-            eventTime: time,
-            eventDate: date,
+            date: this.getActualDate(eventDate, index),
+            eventDate,
+            eventTime,
             id: id,
+            popup: !this.state.popup,
         })
     }
 
@@ -112,11 +138,12 @@ class App extends React.Component {
                 />
                 <Main week={this.state.week} showPopup={this.showPopup} />
                 {this.state.popup && <Popup
-                    closePopup={this.closePopup}
+                    createTask={this.createTask}
                     eventTime={this.state.eventTime}
-                    eventDate={this.state.eventDate}
                     id={this.state.id}
                     delete={this.delete}
+                    date={this.state.date}
+                    closePopup={this.closePopup}
                 />}
             </>
         )

@@ -1,17 +1,17 @@
 import React from 'react';
 import './popup.scss';
-import { postToServer } from '../gateways/gateways.js';
 
 class Popup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             color: '#4183f1',
-            text: '',
-            startDate: '2020-02-26',
-            startTime: '00:00',
-            endTime: '00:00',
-            endDate: '2020-02-26',
+            title: '',
+            description: '',
+            startDate: this.props.date,
+            startTime: this.props.eventTime,
+            endTime: this.props.eventTime,
+            endDate: this.props.date
         }
     }
 
@@ -48,7 +48,7 @@ class Popup extends React.Component {
                     <button className="close material-icons" onClick={this.props.closePopup}>
                         close
                     </button>
-                    <input name="title" className="input__name" type="text" placeholder="Add title" />
+                    <input name="title" className="input__name" type="text" placeholder="Add title" value={this.state.title} onChange={this.handleChange} />
                     <div className="color-picker">
                         <label className="color-picker_label">
                             <span className="color-picker_label-text">Select a color</span>
@@ -65,8 +65,15 @@ class Popup extends React.Component {
                     </div>
                     <div className="description ">
                         <i className="Tiny material-icons ">format_align_left</i>
-                        <textarea className="description-input " name="text" cols="42 " rows="4 "
-                            placeholder="Add description" onChange={this.handleChange} value={this.state.text}></textarea>
+                        <textarea
+                            className="description-input "
+                            name="description"
+                            cols="42 "
+                            rows="4 "
+                            placeholder="Add description"
+                            onChange={this.handleChange}
+                            value={this.state.description}>
+                        </textarea>
                     </div>
                     <div className="control ">
                         <button
@@ -77,12 +84,10 @@ class Popup extends React.Component {
                         </button>
                         <button
                             className="submit-button "
-                            onClick={() => {
-                                postToServer(this.state)
-                                    .then(this.props.closePopup());
-                            }}>
+                            onClick={() => this.props.createTask(this.state)}
+                        >
                             Save
-                            </button>
+                        </button>
                     </div>
                 </div>
             </section >

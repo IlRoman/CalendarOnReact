@@ -9,6 +9,7 @@ class ActiveEvent extends React.Component {
     }
 
     getPosition = () => {
+        console.log(this.props)
         return +this.props.startTime.split(':')[0] * 60 + 100
     }
 
@@ -23,7 +24,8 @@ class ActiveEvent extends React.Component {
                 }}
                 onClick={() => this.props.showPopup('00:00', '2020-02-02', this.props.id)}
             >
-                {this.props.text}
+                {this.props.title}
+                <p>{this.props.description}</p>
             </div >
         )
     }

@@ -10,10 +10,11 @@ class Day extends React.Component {
         newArr = newArr.filter(event => (new Date(event.startDate) + '').split(' ')[1] === (this.getCurrentDay() + '').split(' ')[1])
         let activeEvents = newArr.map((event) => {
             return (<ActiveEvent
-                key={Math.random()}
+                key={event.id}
                 id={event.id}
                 color={event.color}
-                text={event.text}
+                title={event.title}
+                description={event.description}
                 startDate={event.startDate}
                 startTime={event.startTime}
                 endTime={event.endTime}
